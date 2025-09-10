@@ -1,0 +1,25 @@
+#select ticker
+
+from ipywidgets import widgets
+from IPython.display import display
+
+# Get all unique tickers
+tickers = sorted(df['Name'].unique())
+
+# Dropdown widget
+ticker_dropdown = widgets.Dropdown(
+    options=tickers,
+    value=tickers[0],   # default = first ticker
+    description='Ticker:',
+    disabled=False,
+)
+
+display(ticker_dropdown)
+
+
+# Store selected ticker
+ticker = ticker_dropdown.value
+print(" You selected:", ticker)
+
+
+
