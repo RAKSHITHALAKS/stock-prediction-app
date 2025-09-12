@@ -9,12 +9,12 @@ Compare multiple model predictions easily.
 Folder Structure
 stock-prediction-app/
 │
-├── app.py                  # Streamlit app
-├── README.md               # This file
-├── requirements.txt        # Python dependencies
-├── sample_stock_data.csv   # Example CSV for testing
-├── models/                 # Folder for model files (add downloaded models here)
-├── scalers/                # Folder for scalers (add downloaded scalers here)
+├── app.py                  
+├── README.md               
+├── requirements.txt        
+├── sample_stock_data.csv   
+├── models/scalers                 
+             
 
 installation
 
