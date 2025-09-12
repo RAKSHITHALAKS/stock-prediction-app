@@ -8,12 +8,11 @@ Compare multiple model predictions easily.
 
 Folder Structure
 stock-prediction-app/
-│
-├── app.py                  
-├── README.md               
-├── requirements.txt        
-├── sample_stock_data.csv   
-├── models/scalers                 
+ app.py                  
+ README.md               
+ requirements.txt        
+ sample_stock_data.csv   
+ models/scalers                 
              
 
 installation
