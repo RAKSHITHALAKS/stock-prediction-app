@@ -11,7 +11,7 @@ stock-prediction-app/
  app.py                  
  README.md               
  requirements.txt        
- sample_stock_data.csv   
+ ticker_dropdown   
  models/scalers                 
              
 
