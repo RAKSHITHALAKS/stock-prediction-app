@@ -11,7 +11,7 @@ lstm_model = tf.keras.models.load_model("lstm_stock.keras")
 svm_model = joblib.load("svm_model.pkl")
 mlp_model = joblib.load("mlp_model.pkl")
 
-st.title("📊 Stock Price Prediction (SVM, MLP, LSTM)")
+st.title(" Stock Price Prediction (SVM, MLP, LSTM)")
 
 st.markdown("""
 Upload a CSV file with a **`close`** column to predict stock prices.
@@ -30,7 +30,7 @@ if uploaded_file is not None:
     if "close" not in df.columns:
         st.error("CSV must have a 'close' column.")
     else:
-        st.subheader("📌 Data Preview")
+        st.subheader(" Data Preview")
         st.dataframe(df.head())
 
         y_true = df["close"].values
@@ -80,11 +80,11 @@ if uploaded_file is not None:
 
                 # Convert 0/1 to Down/Up
                 pred_direction = ["Down" if p == 0 else "Up" for p in pred]
-                st.subheader("📈 Predicted Direction (SVM)")
+                st.subheader(" Predicted Direction (SVM)")
                 st.write(pred_direction)
 
                 # Optional: step chart
-                st.subheader("📊 Predicted Direction Chart")
+                st.subheader(" Predicted Direction Chart")
                 st.line_chart([0 if p=="Down" else 1 for p in pred_direction])
 
                 # --- Compute classification metrics ---
@@ -93,7 +93,7 @@ if uploaded_file is not None:
                 y_true_dir = y_aligned[1:] > y_aligned[:-1]
                 y_true_dir = y_true_dir.astype(int)
                 y_pred_dir = pred[:len(y_true_dir)]
-                st.subheader("📋 SVM Classification Metrics")
+                st.subheader(" SVM Classification Metrics")
                 st.write(f"**Accuracy:** {accuracy_score(y_true_dir, y_pred_dir):.4f}")
                 st.write("**Confusion Matrix:**")
                 st.write(confusion_matrix(y_true_dir, y_pred_dir))
@@ -107,11 +107,11 @@ if uploaded_file is not None:
 
         # --- Show Predictions for MLP / LSTM ---
         if model_choice != "SVM":
-            st.subheader(f"📈 Predicted Prices ({model_choice})")
+            st.subheader(f" Predicted Prices ({model_choice})")
             st.line_chart(pred)
 
             # --- Compare Actual vs Predicted ---
-            st.subheader("📊 Predicted vs Actual")
+            st.subheader(" Predicted vs Actual")
             combined = pd.DataFrame({
                 "Actual": y_true.flatten(),
                 "Predicted": pred.flatten()
@@ -122,6 +122,6 @@ if uploaded_file is not None:
             mse = mean_squared_error(y_true, pred)
             mae = mean_absolute_error(y_true, pred)
 
-            st.subheader("📋 Model Performance")
+            st.subheader(" Model Performance")
             st.write(f"**MSE:** {mse:.4f}")
             st.write(f"**MAE:** {mae:.4f}")
