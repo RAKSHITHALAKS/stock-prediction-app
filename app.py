@@ -12,15 +12,16 @@ import gdown
 import tensorflow as tf
 import joblib
 
-# Create folder to store downloaded models
-if not os.path.exists("models"):
-    os.makedirs("models")
+# Folder to store models
+model_dir = "models"
+if not os.path.exists(model_dir):
+    os.makedirs(model_dir)
 
 # ------------------------------
 # LSTM Model
 # ------------------------------
 lstm_url = "https://drive.google.com/uc?export=download&id=1JvhPw4mPvL7UWrGm1mwet3UBT5INjNXO"
-lstm_path = "models/lstm_stock.keras"
+lstm_path = os.path.join(model_dir, "lstm_stock.keras")
 if not os.path.exists(lstm_path):
     gdown.download(lstm_url, lstm_path, quiet=False)
 lstm_model = tf.keras.models.load_model(lstm_path)
@@ -29,7 +30,7 @@ lstm_model = tf.keras.models.load_model(lstm_path)
 # MLP Model
 # ------------------------------
 mlp_url = "https://drive.google.com/uc?export=download&id=12FtUiL_PKXfo1Z6Nv7adds3NOta_NICr"
-mlp_path = "models/mlp_model.pkl"
+mlp_path = os.path.join(model_dir, "mlp_model.pkl")
 if not os.path.exists(mlp_path):
     gdown.download(mlp_url, mlp_path, quiet=False)
 mlp_model = joblib.load(mlp_path)
@@ -38,10 +39,11 @@ mlp_model = joblib.load(mlp_path)
 # SVM Model
 # ------------------------------
 svm_url = "https://drive.google.com/uc?export=download&id=1bOhNKntdNX5xEv5kv33QQKrbdiDSaiI7"
-svm_path = "models/svm_model.pkl"
+svm_path = os.path.join(model_dir, "svm_model.pkl")
 if not os.path.exists(svm_path):
     gdown.download(svm_url, svm_path, quiet=False)
 svm_model = joblib.load(svm_path)
+
 
 # ------------------------
 st.title("📊 Stock Price Prediction Dashboard")
