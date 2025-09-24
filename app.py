@@ -7,20 +7,42 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error, accuracy_score, confusion_matrix, classification_report
 import logging
 
-# ------------------------
-# Setup logging
-# ------------------------
-logging.basicConfig(level=logging.INFO)
+import os
+import gdown
+import tensorflow as tf
+import joblib
 
-# ------------------------
-# Load Models
-# ------------------------
-lstm_model = tf.keras.models.load_model("lstm_stock.keras")
-svm_model = joblib.load("svm_model.pkl")
-mlp_model = joblib.load("mlp_model.pkl")
+# Create folder to store downloaded models
+if not os.path.exists("models"):
+    os.makedirs("models")
 
-# ------------------------
-# App Title
+# ------------------------------
+# LSTM Model
+# ------------------------------
+lstm_url = "https://drive.google.com/uc?export=download&id=1JvhPw4mPvL7UWrGm1mwet3UBT5INjNXO"
+lstm_path = "models/lstm_stock.keras"
+if not os.path.exists(lstm_path):
+    gdown.download(lstm_url, lstm_path, quiet=False)
+lstm_model = tf.keras.models.load_model(lstm_path)
+
+# ------------------------------
+# MLP Model
+# ------------------------------
+mlp_url = "https://drive.google.com/uc?export=download&id=12FtUiL_PKXfo1Z6Nv7adds3NOta_NICr"
+mlp_path = "models/mlp_model.pkl"
+if not os.path.exists(mlp_path):
+    gdown.download(mlp_url, mlp_path, quiet=False)
+mlp_model = joblib.load(mlp_path)
+
+# ------------------------------
+# SVM Model
+# ------------------------------
+svm_url = "https://drive.google.com/uc?export=download&id=1bOhNKntdNX5xEv5kv33QQKrbdiDSaiI7"
+svm_path = "models/svm_model.pkl"
+if not os.path.exists(svm_path):
+    gdown.download(svm_url, svm_path, quiet=False)
+svm_model = joblib.load(svm_path)
+
 # ------------------------
 st.title("📊 Stock Price Prediction Dashboard")
 st.markdown("""
